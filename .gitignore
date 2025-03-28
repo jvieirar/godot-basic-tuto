@@ -10,3 +10,4 @@ Exports/*
 *.exe
 *.x86_64
 *.app
+.vercel
