@@ -2,8 +2,8 @@
 .godot/
 /android/
 
-# Exports/
-# Exports/*
+Exports/
+Exports/*
 
 # Binary files
 *.pck
