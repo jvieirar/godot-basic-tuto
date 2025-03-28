@@ -1,4 +1,12 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
-Exports/*.dmg
+
+Exports/
+Exports/*
+
+# Binary files
+*.pck
+*.exe
+*.x86_64
+*.app
