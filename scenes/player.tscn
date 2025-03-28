@@ -1,11 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0pyuiqls0obq"]
+[gd_scene load_steps=13 format=3 uid="uid://d0pyuiqls0obq"]
 
 [ext_resource type="Texture2D" uid="uid://dncrjyuvibpg7" path="res://assents/sprites/MitoPixel64Stripe.png" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://esc42vpyncci" path="res://assents/sprites/MitoStill64_2.png" id="1_g2els"]
 [ext_resource type="Script" uid="uid://c4uv0qx7ma3j5" path="res://scripts/player.gd" id="1_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://dhtcw241bvf8x" path="res://assents/sprites/MitoJump64.png" id="3_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
 atlas = ExtResource("1_g2els")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("3_dqkch")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
@@ -36,6 +41,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}],
+"loop": true,
+"name": &"jumping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_g2els")
 }, {
 "duration": 1.0,
@@ -62,7 +75,7 @@ script = ExtResource("1_qhqgy")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"idle"
+animation = &"jumping"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -17)
