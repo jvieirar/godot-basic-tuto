@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bewtnieskj22b"]
+[gd_scene load_steps=19 format=4 uid="uid://bewtnieskj22b"]
 
 [ext_resource type="PackedScene" uid="uid://d0pyuiqls0obq" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://c0a8t0at2ccxx" path="res://assents/sprites/world_tileset.png" id="2_yqjtg"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c5l0nhr6371d0" path="res://scenes/coin.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://b0ru2g86fnfrq" path="res://scenes/kill_zone.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://4xq1jcoo8cgp" path="res://scenes/enemy_slime.tscn" id="6_p57ef"]
+[ext_resource type="FontFile" uid="uid://btfqg87dnlw4l" path="res://assents/fonts/PixelOperator8.ttf" id="7_u5sy4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
 texture = ExtResource("2_yqjtg")
@@ -423,6 +424,12 @@ position = Vector2(104, 27)
 [node name="Coin5" parent="Coins" instance=ExtResource("4_lbhrr")]
 position = Vector2(812, -41)
 
+[node name="Coin6" parent="Coins" instance=ExtResource("4_lbhrr")]
+position = Vector2(845, -41)
+
+[node name="Coin7" parent="Coins" instance=ExtResource("4_lbhrr")]
+position = Vector2(879, -41)
+
 [node name="Coin8" parent="Coins" instance=ExtResource("4_lbhrr")]
 position = Vector2(686, 134)
 
@@ -432,11 +439,14 @@ position = Vector2(686, 150)
 [node name="Coin10" parent="Coins" instance=ExtResource("4_lbhrr")]
 position = Vector2(686, 166)
 
-[node name="Coin6" parent="Coins" instance=ExtResource("4_lbhrr")]
-position = Vector2(845, -41)
+[node name="Coin11" parent="Coins" instance=ExtResource("4_lbhrr")]
+position = Vector2(1162, -460)
 
-[node name="Coin7" parent="Coins" instance=ExtResource("4_lbhrr")]
-position = Vector2(879, -41)
+[node name="Coin12" parent="Coins" instance=ExtResource("4_lbhrr")]
+position = Vector2(1162, -443)
+
+[node name="Coin13" parent="Coins" instance=ExtResource("4_lbhrr")]
+position = Vector2(1162, -426)
 
 [node name="Platforms" type="Node" parent="."]
 
@@ -461,14 +471,16 @@ libraries = {
 }
 autoplay = "up_down"
 
-[node name="Coin" parent="." instance=ExtResource("4_lbhrr")]
-position = Vector2(1162, -460)
-
-[node name="Coin2" parent="." instance=ExtResource("4_lbhrr")]
-position = Vector2(1162, -443)
-
-[node name="Coin3" parent="." instance=ExtResource("4_lbhrr")]
-position = Vector2(1162, -426)
-
 [node name="EnemySlime" parent="." instance=ExtResource("6_p57ef")]
 position = Vector2(496, -50)
+
+[node name="Labels" type="Node" parent="."]
+
+[node name="HintJump" type="Label" parent="Labels"]
+offset_left = 272.0
+offset_top = 107.0
+offset_right = 382.0
+offset_bottom = 130.0
+theme_override_fonts/font = ExtResource("7_u5sy4")
+theme_override_font_sizes/font_size = 8
+text = "Space to jump"
