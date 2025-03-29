@@ -270,3 +270,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_iywne")
 }
 autoplay = "move"
+
+[node name="Platform" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(1297, -59)
