@@ -78,7 +78,7 @@ script = ExtResource("1_qhqgy")
 position = Vector2(-9.53674e-07, -20)
 scale = Vector2(0.625, 0.625)
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"idle"
+animation = &"running"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11)
