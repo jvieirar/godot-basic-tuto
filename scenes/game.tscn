@@ -342,6 +342,21 @@ _data = {
 &"move": SubResource("Animation_lnu2h")
 }
 
+[sub_resource type="Animation" id="Animation_p57ef"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1300, -59)]
+}
+
 [sub_resource type="Animation" id="Animation_iywne"]
 resource_name = "up_down"
 length = 3.0
@@ -359,21 +374,6 @@ tracks/0/keys = {
 "values": [Vector2(1300, -59), Vector2(1300, -300)]
 }
 
-[sub_resource type="Animation" id="Animation_p57ef"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1300, -59)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u5sy4"]
 _data = {
 &"RESET": SubResource("Animation_p57ef"),
@@ -385,6 +385,18 @@ _data = {
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_gee14")
+
+[node name="LabelEndLevelScore" type="Label" parent="GameManager"]
+offset_left = 659.0
+offset_top = -361.0
+offset_right = 769.0
+offset_bottom = -331.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 8
+text = "You have collected X coins!"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="Layers" type="Node" parent="."]
 
@@ -455,16 +467,16 @@ position = Vector2(1162, -443)
 position = Vector2(1162, -426)
 
 [node name="Coin14" parent="Coins" instance=ExtResource("4_lbhrr")]
-position = Vector2(927, -288)
+position = Vector2(926, -276)
 
 [node name="Coin15" parent="Coins" instance=ExtResource("4_lbhrr")]
-position = Vector2(947, -289)
+position = Vector2(946, -276)
 
 [node name="Coin16" parent="Coins" instance=ExtResource("4_lbhrr")]
-position = Vector2(907, -288)
+position = Vector2(906, -276)
 
 [node name="Coin17" parent="Coins" instance=ExtResource("4_lbhrr")]
-position = Vector2(889, -288)
+position = Vector2(888, -276)
 
 [node name="Platforms" type="Node" parent="."]
 
@@ -504,24 +516,13 @@ theme_override_font_sizes/font_size = 8
 text = "Space to jump"
 
 [node name="LabelEndLevel" type="Label" parent="Labels"]
-offset_left = 669.0
+offset_left = 662.0
 offset_top = -375.0
-offset_right = 779.0
+offset_right = 772.0
 offset_bottom = -352.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("9_0tnpc")
 theme_override_font_sizes/font_size = 8
 text = "You made it!
 "
-
-[node name="LabelEndLevelScore" type="Label" parent="Labels"]
-offset_left = 659.0
-offset_top = -361.0
-offset_right = 769.0
-offset_bottom = -331.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_0tnpc")
-theme_override_font_sizes/font_size = 8
-text = "You have collected X coins!"
 horizontal_alignment = 1
-autowrap_mode = 2
