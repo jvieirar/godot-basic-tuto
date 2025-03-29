@@ -3,11 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://lss82f6n5vtd" path="res://assents/sprites/platforms.png" id="1_ba0x2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nlgqw"]
-size = Vector2(32, 10)
+size = Vector2(40, 10)
 
 [node name="Platform" type="AnimatableBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-5.36442e-07, 0)
+scale = Vector2(1.29032, 1)
 texture = ExtResource("1_ba0x2")
 region_enabled = true
 region_rect = Rect2(17, 0, 31, 9)

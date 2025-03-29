@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://bewtnieskj22b"]
+[gd_scene load_steps=15 format=4 uid="uid://bewtnieskj22b"]
 
 [ext_resource type="PackedScene" uid="uid://d0pyuiqls0obq" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://c0a8t0at2ccxx" path="res://assents/sprites/world_tileset.png" id="2_yqjtg"]
@@ -212,6 +212,44 @@ _data = {
 &"move": SubResource("Animation_lnu2h")
 }
 
+[sub_resource type="Animation" id="Animation_iywne"]
+resource_name = "up_down"
+length = 3.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1300, -59), Vector2(1300, -300)]
+}
+
+[sub_resource type="Animation" id="Animation_p57ef"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1300, -59)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u5sy4"]
+_data = {
+&"RESET": SubResource("Animation_p57ef"),
+&"up_down": SubResource("Animation_iywne")
+}
+
 [node name="Game" type="Node2D"]
 
 [node name="TileMap" type="TileMapLayer" parent="."]
@@ -271,5 +309,11 @@ libraries = {
 }
 autoplay = "move"
 
-[node name="Platform" parent="." instance=ExtResource("3_lnu2h")]
-position = Vector2(1297, -59)
+[node name="Platform3" parent="Platforms" instance=ExtResource("3_lnu2h")]
+position = Vector2(1300, -59)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform3"]
+libraries = {
+&"": SubResource("AnimationLibrary_u5sy4")
+}
+autoplay = "up_down"
