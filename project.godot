@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="BasicTuto"
+config/name="TotoTata Adventures"
+config/description="Follow Toto and Tata while they jump around and explore"
 run/main_scene="uid://bewtnieskj22b"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://bfn6rcrjpt545"
 
 [autoload]
 
