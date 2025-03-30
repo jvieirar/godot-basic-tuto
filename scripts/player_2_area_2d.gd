@@ -10,7 +10,7 @@ func _ready():
 
 func _on_body_entered(body):
 	# Check if the body is Player2
-	pass
-	#print("[Player 2] collision with body: " + body.name)
+	#pass
+	print("[Player 2] collision with body: " + body.name)
 	#if body.name == "Player1":
 		#emit_signal("player_collision", body)
