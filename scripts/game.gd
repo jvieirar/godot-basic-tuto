@@ -12,8 +12,8 @@ func _ready():
 	# Connect player collision signals to game manager
 	if player1_area:
 		player1_area.player_collision.connect(_on_player_collision)
-	if player2_area:
-		player2_area.player_collision.connect(_on_player_collision)
+	#if player2_area:
+		#player2_area.player_collision.connect(_on_player_collision)
 	
 	# Create a timer programmatically
 	swap_cooldown = Timer.new()
