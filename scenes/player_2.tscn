@@ -80,12 +80,11 @@ height = 33.9871
 size = Vector2(40, 24)
 
 [node name="Player2" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider")]
+collision_layer = 34
+collision_mask = 17
 script = ExtResource("1_s551d")
 PlayerSprite = NodePath("AnimatedSprite2D")
 PlayerCollider = NodePath("CollisionShape2D")
-maxSpeed = 150.0
-timeToReachMaxSpeed = 1.0
-gravityScale = 8.0
 descendingGravityFactor = 0.5
 run = true
 jump = true

@@ -84,6 +84,7 @@ size = Vector2(25.5, 24)
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider")]
 z_index = 5
 collision_layer = 18
+collision_mask = 33
 floor_block_on_wall = false
 script = ExtResource("1_qhqgy")
 PlayerSprite = NodePath("AnimatedSprite2D")
@@ -100,7 +101,7 @@ sprite_frames = SubResource("SpriteFrames_tuyoq")
 animation = &"falling"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -11)
+position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_fjrip")
 
 [node name="Area2D" type="Area2D" parent="."]
