@@ -8,6 +8,10 @@
 
 config_version=5
 
+[GDScript_Formatter]
+
+format_on_save=true
+
 [application]
 
 config/name="TotoTata Adventures"
@@ -22,7 +26,7 @@ Music="*res://scenes/music.tscn"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/virtual_joystick/plugin.cfg")
+enabled=PackedStringArray("res://addons/gdscript_formatter/plugin.cfg", "res://addons/virtual_joystick/plugin.cfg")
 
 [input]
 
