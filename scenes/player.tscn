@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0pyuiqls0obq"]
+[gd_scene load_steps=15 format=3 uid="uid://d0pyuiqls0obq"]
 
 [ext_resource type="Texture2D" uid="uid://dncrjyuvibpg7" path="res://assents/sprites/MitoPixel64Stripe.png" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://esc42vpyncci" path="res://assents/sprites/MitoStill64_2.png" id="1_g2els"]
 [ext_resource type="Script" uid="uid://c4uv0qx7ma3j5" path="res://scripts/player.gd" id="1_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://dhtcw241bvf8x" path="res://assents/sprites/MitoJump64.png" id="3_dqkch"]
+[ext_resource type="Script" uid="uid://bcwqrdl4ognef" path="res://scripts/player_1_area_2d.gd" id="5_qlg0r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
 atlas = ExtResource("3_dqkch")
@@ -77,9 +78,12 @@ animations = [{
 radius = 11.0
 height = 22.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
+size = Vector2(25.5, 24)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider")]
 z_index = 5
-collision_layer = 2
+collision_layer = 18
 floor_block_on_wall = false
 script = ExtResource("1_qhqgy")
 PlayerSprite = NodePath("AnimatedSprite2D")
@@ -98,3 +102,11 @@ animation = &"falling"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11)
 shape = SubResource("CapsuleShape2D_fjrip")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 33
+script = ExtResource("5_qlg0r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -11)
+shape = SubResource("RectangleShape2D_dqkch")

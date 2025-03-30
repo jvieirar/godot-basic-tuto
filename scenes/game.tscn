@@ -1,5 +1,6 @@
-[gd_scene load_steps=23 format=4 uid="uid://bewtnieskj22b"]
+[gd_scene load_steps=24 format=4 uid="uid://bewtnieskj22b"]
 
+[ext_resource type="Script" uid="uid://cxk5b68wj8qsi" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="Script" uid="uid://bjqde2mn7mcx6" path="res://scripts/game_manager.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://d0pyuiqls0obq" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://c0a8t0at2ccxx" path="res://assents/sprites/world_tileset.png" id="2_yqjtg"]
@@ -383,6 +384,7 @@ _data = {
 }
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_dinhu")
 
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true

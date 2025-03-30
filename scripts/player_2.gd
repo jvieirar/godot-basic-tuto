@@ -177,6 +177,9 @@ var rollTap
 var downTap
 var twirlTap
 
+# control active player
+var can_process_input := true
+
 func _ready():
 	wasMovingR = true
 	anim = PlayerSprite
@@ -330,23 +333,43 @@ func _physics_process(delta):
 	if !dset:
 		gdelta = delta
 		dset = true
-	#INFO Input Detectio. Define your inputs from the project settings here.
-	leftHold = Input.is_action_pressed("move_left")
-	rightHold = Input.is_action_pressed("move_right")
-	upHold = Input.is_action_pressed("up")
-	downHold = Input.is_action_pressed("down")
-	leftTap = Input.is_action_just_pressed("move_left")
-	rightTap = Input.is_action_just_pressed("move_right")
-	leftRelease = Input.is_action_just_released("move_left")
-	rightRelease = Input.is_action_just_released("move_right")
-	jumpTap = Input.is_action_just_pressed("jump")
-	jumpRelease = Input.is_action_just_released("jump")
-	runHold = Input.is_action_pressed("run")
-	latchHold = Input.is_action_pressed("latch")
-	dashTap = Input.is_action_just_pressed("dash")
-	rollTap = Input.is_action_just_pressed("roll")
-	downTap = Input.is_action_just_pressed("down")
-	twirlTap = Input.is_action_just_pressed("twirl")
+		
+	if can_process_input:
+		#INFO Input Detectio. Define your inputs from the project settings here.
+		leftHold = Input.is_action_pressed("move_left")
+		rightHold = Input.is_action_pressed("move_right")
+		upHold = Input.is_action_pressed("up")
+		downHold = Input.is_action_pressed("down")
+		leftTap = Input.is_action_just_pressed("move_left")
+		rightTap = Input.is_action_just_pressed("move_right")
+		leftRelease = Input.is_action_just_released("move_left")
+		rightRelease = Input.is_action_just_released("move_right")
+		jumpTap = Input.is_action_just_pressed("jump")
+		jumpRelease = Input.is_action_just_released("jump")
+		runHold = Input.is_action_pressed("run")
+		latchHold = Input.is_action_pressed("latch")
+		dashTap = Input.is_action_just_pressed("dash")
+		rollTap = Input.is_action_just_pressed("roll")
+		downTap = Input.is_action_just_pressed("down")
+		twirlTap = Input.is_action_just_pressed("twirl")
+	else:
+		# Reset all input variables when not processing input
+		leftHold = false
+		rightHold = false
+		upHold = false
+		downHold = false
+		leftTap = false
+		rightTap = false
+		leftRelease = false
+		rightRelease = false
+		jumpTap = false
+		jumpRelease = false
+		runHold = false
+		latchHold = false
+		dashTap = false
+		rollTap = false
+		downTap = false
+		twirlTap = false
 	
 	
 	#INFO Left and Right Movement

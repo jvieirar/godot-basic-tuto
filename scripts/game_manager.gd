@@ -28,15 +28,27 @@ func swap_player():
 		set_player_1()
 
 func set_player_1():
+	print("Setting active player to Player1")
 	selected_player = player_1
-	player_1.process_mode = Node.PROCESS_MODE_INHERIT
-	camera_player_1.enabled = true
-	player_2.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	# Explicitly disable Player2's camera first
 	camera_player_2.enabled = false
+	# Then enable Player1's camera
+	camera_player_1.enabled = true
+	
+	# Set input processing
+	player_1.can_process_input = true
+	player_2.can_process_input = false
 
 func set_player_2():
+	print("Setting active player to Player2")
 	selected_player = player_2
-	player_1.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	# Explicitly disable Player1's camera first
 	camera_player_1.enabled = false
-	player_2.process_mode = Node.PROCESS_MODE_INHERIT
+	# Then enable Player2's camera
 	camera_player_2.enabled = true
+	
+	# Set input processing
+	player_1.can_process_input = false
+	player_2.can_process_input = true
