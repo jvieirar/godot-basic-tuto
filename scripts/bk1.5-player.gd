@@ -321,12 +321,6 @@ func _process(_delta):
 		
 
 func _physics_process(delta):
-	if !is_instance_valid(col):
-		# Player is dying, don't process physics
-		# Player is dying, but we still want it to fall
-		velocity.y += 20 * delta  # Simple gravity
-		position.y += velocity.y * delta  # Manual 
-		return
 	if !dset:
 		gdelta = delta
 		dset = true

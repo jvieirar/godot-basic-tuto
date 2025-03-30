@@ -112,7 +112,13 @@ extends CharacterBody2D
 ##Animations must be named "roll" all lowercase as the check box says
 @export var roll: bool
 
+@export_category("Jump Tilt Animation")
+## Maximum tilt angle in degrees when jumping
+@export_range(0, 45) var MAX_TILT_ANGLE: float = 15.0
 
+# Track jump state for tilt animation
+var previous_y_velocity: float = 0
+var jump_peak_reached: bool = false
 
 #Variables determined by the developer set ones.
 var appliedGravity: float
@@ -321,12 +327,9 @@ func _process(_delta):
 		
 
 func _physics_process(delta):
-	if !is_instance_valid(col):
-		# Player is dying, don't process physics
-		# Player is dying, but we still want it to fall
-		velocity.y += 20 * delta  # Simple gravity
-		position.y += velocity.y * delta  # Manual 
-		return
+	# Store previous velocity for peak detection (add this near the top of the function)
+	previous_y_velocity = velocity.y
+	
 	if !dset:
 		gdelta = delta
 		dset = true
@@ -407,6 +410,14 @@ func _physics_process(delta):
 			
 	if !is_on_floor():
 		crouching = false
+		
+		# Track jump state for tilt animation
+		if velocity.y > 0 and previous_y_velocity <= 0:
+			# We've reached the peak of our jump
+			jump_peak_reached = true
+		
+		# Apply tilt based on jump state
+		_apply_jump_tilt()
 			
 	if crouching:
 		maxSpeed = maxSpeedLock / 2
@@ -508,6 +519,7 @@ func _physics_process(delta):
 			velocity.y = -jumpMagnitude
 			jumpCount = jumpCount - 1
 			_endGroundPound()
+			jump_peak_reached = false  # Reset jump peak tracking
 		elif jumpTap and is_on_wall() and wallJump:
 			_wallJump()
 			
@@ -667,3 +679,26 @@ func _endGroundPound():
 
 func _placeHolder():
 	print("")
+	
+func _apply_jump_tilt():
+	# Calculate tilt based on vertical velocity
+	var tilt_factor = 0.0
+	
+	if not jump_peak_reached:
+		# First half of jump (going up) - tilt upward
+		 # Map from -jumpMagnitude to 0
+		tilt_factor = remap(velocity.y, -jumpMagnitude, 0, -1.0, 0.0)
+	else:
+		# Second half of jump (falling) - tilt downward
+		# Map from 0 to some positive value
+		tilt_factor = remap(velocity.y, 0, 400, 0.0, 1.0)
+	
+	# Clamp the tilt factor between -1 and 1
+	tilt_factor = clamp(tilt_factor, -1.0, 1.0)
+	
+	# Apply rotation based on tilt factor
+	PlayerSprite.rotation_degrees = tilt_factor * MAX_TILT_ANGLE
+	
+	# If sprite is flipped, reverse the tilt
+	if PlayerSprite.flip_h:
+		PlayerSprite.rotation_degrees *= -1
