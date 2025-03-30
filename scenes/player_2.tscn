@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://d06idav8kkd22"]
+[gd_scene load_steps=11 format=3 uid="uid://d06idav8kkd22"]
 
 [ext_resource type="Texture2D" uid="uid://67pf3m48fvig" path="res://assents/sprites/tata-animations.png" id="1_l6tho"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l6tho"]
-atlas = ExtResource("1_l6tho")
-region = Rect2(0, 0, 64, 64)
+[ext_resource type="Script" uid="uid://dyj4q5fqjefo4" path="res://scripts/player_2.gd" id="1_s551d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v7tvf"]
 atlas = ExtResource("1_l6tho")
 region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6tho"]
+atlas = ExtResource("1_l6tho")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s551d"]
 atlas = ExtResource("1_l6tho")
@@ -28,6 +29,14 @@ region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_v7tvf"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7tvf")
+}],
+"loop": true,
+"name": &"falling",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l6tho")
@@ -66,12 +75,23 @@ animations = [{
 radius = 9.99981
 height = 33.9871
 
-[node name="Player2" type="CharacterBody2D"]
+[node name="Player2" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider")]
+script = ExtResource("1_s551d")
+PlayerSprite = NodePath("AnimatedSprite2D")
+PlayerCollider = NodePath("CollisionShape2D")
+maxSpeed = 150.0
+timeToReachMaxSpeed = 1.0
+gravityScale = 8.0
+descendingGravityFactor = 0.5
+run = true
+jump = true
+idle = true
+falling = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.625, 0.625)
 sprite_frames = SubResource("SpriteFrames_v7tvf")
-animation = &"run"
+animation = &"falling"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 10)

@@ -416,7 +416,7 @@ tile_set = SubResource("TileSet_lbhrr")
 [node name="Player1" parent="Players" instance=ExtResource("1_uwrxv")]
 position = Vector2(172, 113)
 
-[node name="Camera2D" type="Camera2D" parent="Players/Player1"]
+[node name="CameraPlayer1" type="Camera2D" parent="Players/Player1"]
 position = Vector2(-1, -48)
 zoom = Vector2(3.5, 3.5)
 limit_bottom = 300
@@ -425,6 +425,14 @@ position_smoothing_enabled = true
 
 [node name="Player2" parent="Players" instance=ExtResource("5_kvpfn")]
 position = Vector2(119, 92)
+
+[node name="CameraPlayer2" type="Camera2D" parent="Players/Player2"]
+position = Vector2(-1, -48)
+enabled = false
+zoom = Vector2(3.5, 3.5)
+limit_bottom = 300
+limit_smoothed = true
+position_smoothing_enabled = true
 
 [node name="KillZone" parent="." instance=ExtResource("5_iywne")]
 position = Vector2(422, 263)
