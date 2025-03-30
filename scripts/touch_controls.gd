@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var button_left: TouchScreenButton = $ButtonLeft
 @onready var button_right: TouchScreenButton = $ButtonRight
 @onready var button_jump: TouchScreenButton = $ButtonJump
+@onready var game_manager: Node = %GameManager
 
 const MARGIN_Y = 30
 const MARGIN_X = 50
@@ -12,9 +13,9 @@ const BUTTON_SPACING = 10  # Space between buttons
 
 func _ready():
 	# Check if touchscreen is available
-	var is_mobile = OS.get_name() == "Android" or OS.get_name() == "iOS" or OS.has_feature("web_android")or OS.has_feature("web_ios")
-	print("is touch available? ", is_mobile)
-	if not is_mobile:
+	
+	print("is touch available? ", game_manager.is_mobile)
+	if not game_manager.is_mobile:
 		# Hide the controls if no touchscreen is detected
 		visible = false
 		return
