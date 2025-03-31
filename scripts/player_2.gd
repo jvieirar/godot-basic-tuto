@@ -66,6 +66,15 @@ extends CharacterBody2D
 @export var dashCancel: bool = true
 ##How far the player will dash. One of the dashing toggles must be on for this to be used.
 @export_range(1.5, 4) var dashLength: float = 2.5
+@export_category("Gliding")
+##If enabled, player can transition to gliding animation
+@export var canGlide: bool = false
+##The strengh reduced from gravity while gliding.
+@export_range(0, 100) var glideGravityReduction: float = 20.0
+##Maximum horizontal speed while gliding
+@export_range(10, 300) var glideMaxHorizontalSpeed: float = 150.0 
+##If enabled, player glides while holding jump action, otherwise, it glides all the time its in the air
+@export var glideHoldingJump: bool = false
 @export_category("Corner Cutting/Jump Correct")
 ##If the player's head is blocked by a jump but only by a little, the player will be nudged in the right direction and their jump will execute as intended. NEEDS RAYCASTS TO BE ATTACHED TO THE PLAYER NODE. AND ASSIGNED TO MOUNTING RAYCAST. DISTANCE OF MOUNTING DETERMINED BY PLACEMENT OF RAYCAST.
 @export var cornerCutting: bool = false
@@ -111,6 +120,8 @@ extends CharacterBody2D
 @export var crouch_walk: bool
 ##Animations must be named "roll" all lowercase as the check box says
 @export var roll: bool
+##Animations must be named "glide" all lowercase as the check box says
+@export var glide: bool
 
 
 
@@ -154,6 +165,7 @@ var latched
 var wasLatched
 var crouching
 var groundPounding
+var gliding = false
 
 var anim
 var col
@@ -170,6 +182,7 @@ var rightTap
 var rightRelease
 var jumpTap
 var jumpRelease
+var jumpHold
 var runHold
 var latchHold
 var dashTap
@@ -289,9 +302,13 @@ func _process(_delta):
 		anim.speed_scale = 1
 		anim.play("jump")
 		
-	if velocity.y > 40 and falling and !dashing and !crouching:
+	if velocity.y > 40 and falling and !dashing and !crouching and !gliding:
 		anim.speed_scale = 1
 		anim.play("falling")
+	
+	if gliding and glide:
+		anim.speed_scale = 1
+		anim.play("glide")
 		
 	if latch and slide:
 		#wall slide and latch
@@ -346,6 +363,7 @@ func _physics_process(delta):
 		rightRelease = Input.is_action_just_released("move_right")
 		jumpTap = Input.is_action_just_pressed("jump")
 		jumpRelease = Input.is_action_just_released("jump")
+		jumpHold = Input.is_action_pressed("jump")  # Add this line to detect when jump is held
 		runHold = Input.is_action_pressed("run")
 		latchHold = Input.is_action_pressed("latch")
 		dashTap = Input.is_action_just_pressed("dash")
@@ -364,6 +382,7 @@ func _physics_process(delta):
 		rightRelease = false
 		jumpTap = false
 		jumpRelease = false
+		jumpHold = false
 		runHold = false
 		latchHold = false
 		dashTap = false
@@ -466,6 +485,26 @@ func _physics_process(delta):
 	else:
 		appliedGravity = gravityScale
 	
+	# Reset gliding when touching the floor
+	if is_on_floor():
+		gliding = false
+	
+	# Simplified gliding logic - glide when falling, have used all jumps, and holding jump
+	if canGlide and velocity.y > 0 and !is_on_floor() and !dashing and !groundPounding:
+		# Check if jump is pressed while in the air
+		if jumpTap and !gliding:
+			gliding = true
+		
+		# Maintain glide while jump is held
+		if gliding and jumpHold:
+			appliedGravity = gravityScale / glideGravityReduction
+			
+			# Cap horizontal speed during glide
+			if abs(velocity.x) > glideMaxHorizontalSpeed:
+				velocity.x = sign(velocity.x) * glideMaxHorizontalSpeed
+		else:
+			gliding = false
+	
 	if is_on_wall() and !groundPounding:
 		appliedTerminalVelocity = terminalVelocity / wallSliding
 		if wallLatching and ((wallLatchingModifer and latchHold) or !wallLatchingModifer):
@@ -507,7 +546,7 @@ func _physics_process(delta):
 				jumpWasPressed = true
 				_bufferJump()
 			elif jumpBuffering == 0 and coyoteTime == 0 and is_on_floor():
-				_jump()	
+				_jump()
 		elif jumpTap and is_on_wall() and !is_on_floor():
 			if wallJump and !latched:
 				_wallJump()
@@ -516,8 +555,6 @@ func _physics_process(delta):
 		elif jumpTap and is_on_floor():
 			_jump()
 		
-		
-			
 		if is_on_floor():
 			jumpCount = jumps
 			coyoteActive = true
@@ -533,8 +570,7 @@ func _physics_process(delta):
 			_endGroundPound()
 		elif jumpTap and is_on_wall() and wallJump:
 			_wallJump()
-			
-			
+	
 	#INFO dashing
 	if is_on_floor():
 		dashCount = dashes

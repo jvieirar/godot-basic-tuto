@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d06idav8kkd22"]
+[gd_scene load_steps=14 format=3 uid="uid://d06idav8kkd22"]
 
 [ext_resource type="Texture2D" uid="uid://67pf3m48fvig" path="res://assents/sprites/tata-animations.png" id="1_l6tho"]
 [ext_resource type="Script" uid="uid://dyj4q5fqjefo4" path="res://scripts/player_2.gd" id="1_s551d"]
@@ -7,6 +7,10 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_v7tvf"]
 atlas = ExtResource("1_l6tho")
 region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_povjg"]
+atlas = ExtResource("1_l6tho")
+region = Rect2(192, 192, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l6tho"]
 atlas = ExtResource("1_l6tho")
@@ -36,6 +40,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_povjg")
+}],
+"loop": true,
+"name": &"glide",
 "speed": 5.0
 }, {
 "frames": [{
@@ -85,17 +97,21 @@ script = ExtResource("1_s551d")
 PlayerSprite = NodePath("AnimatedSprite2D")
 PlayerCollider = NodePath("CollisionShape2D")
 maxSpeed = 110.0
-terminalVelocity = 100.0
-dashType = 1
+jumpHeight = 1.8
+canGlide = true
+glideGravityReduction = 100.0
+glideHoldingJump = true
 run = true
 jump = true
 idle = true
 falling = true
+glide = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.625, 0.625)
 sprite_frames = SubResource("SpriteFrames_v7tvf")
-animation = &"run"
+animation = &"glide"
+frame_progress = 0.478129
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 10)
