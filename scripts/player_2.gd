@@ -135,6 +135,7 @@ var acceleration: float
 var deceleration: float
 var instantAccel: bool = false
 var instantStop: bool = false
+var canActivateGlide: bool = false 
 
 var jumpMagnitude: float = 500.0
 var jumpCount: int
@@ -488,22 +489,30 @@ func _physics_process(delta):
 	# Reset gliding when touching the floor
 	if is_on_floor():
 		gliding = false
+		canActivateGlide = false
 	
-	# Simplified gliding logic - glide when falling, have used all jumps, and holding jump
-	if canGlide and velocity.y > 0 and !is_on_floor() and !dashing and !groundPounding:
-		# Check if jump is pressed while in the air
-		if jumpTap and !gliding:
+	# Enable glide activation once player starts falling after a jump
+	if !is_on_floor() and velocity.y > 0 and !canActivateGlide:
+		canActivateGlide = true
+	
+	# Simplified gliding logic - activate glide when falling and pressing jump
+	if canGlide and !is_on_floor() and !dashing and !groundPounding:
+		# Start gliding when jump is pressed while falling
+		if jumpTap and canActivateGlide:
 			gliding = true
+			canActivateGlide = false
 		
 		# Maintain glide while jump is held
-		if gliding and jumpHold:
-			appliedGravity = gravityScale / glideGravityReduction
-			
-			# Cap horizontal speed during glide
-			if abs(velocity.x) > glideMaxHorizontalSpeed:
-				velocity.x = sign(velocity.x) * glideMaxHorizontalSpeed
-		else:
-			gliding = false
+		if gliding:
+			if jumpHold:
+				appliedGravity = gravityScale / glideGravityReduction
+				
+				# Cap horizontal speed during glide
+				if abs(velocity.x) > glideMaxHorizontalSpeed:
+					velocity.x = sign(velocity.x) * glideMaxHorizontalSpeed
+			else:
+				# End gliding if jump is released
+				gliding = false
 	
 	if is_on_wall() and !groundPounding:
 		appliedTerminalVelocity = terminalVelocity / wallSliding
