@@ -904,6 +904,7 @@ tile_set = SubResource("TileSet_e1j6l")
 position = Vector2(183, 113)
 collision_layer = 18
 maxSpeed = 180.0
+coyoteTime = 0.3
 
 [node name="CameraPlayer1" type="Camera2D" parent="Players/Player1"]
 position = Vector2(-1, -48)
@@ -916,6 +917,7 @@ position_smoothing_enabled = true
 position = Vector2(650, -308)
 collision_layer = 34
 descendingGravityFactor = 1.1
+coyoteTime = 0.3
 
 [node name="CameraPlayer2" type="Camera2D" parent="Players/Player2"]
 position = Vector2(-1, -27)
@@ -1086,7 +1088,19 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("9_0tnpc")
 theme_override_font_sizes/font_size = 8
 text = "I'm zpecial!
-I can get there no pwoblem!"
+<-- I can get there no pawblem!"
+horizontal_alignment = 1
+
+[node name="TataSpeech2" type="Label" parent="Labels"]
+offset_left = 127.0
+offset_top = -443.0
+offset_right = 339.0
+offset_bottom = -422.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_0tnpc")
+theme_override_font_sizes/font_size = 8
+text = "Press jump again
+to glide"
 horizontal_alignment = 1
 
 [node name="Controls" type="Node" parent="."]

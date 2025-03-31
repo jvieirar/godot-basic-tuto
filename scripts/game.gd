@@ -42,7 +42,7 @@ func _set_window_size():
 	var screen_size = DisplayServer.screen_get_size()
 	
 	# Calculate window size (e.g., 80% of screen width)
-	var scale_factor = 0.5  # 80% of screen size
+	var scale_factor = 0.4  # 80% of screen size
 	var window_width = int(screen_size.x * scale_factor)
 	# Calculate height to maintain 16:9 ratio
 	var window_height = int(window_width * 9.0 / 16.0)
