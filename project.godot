@@ -26,7 +26,7 @@ Music="*res://scenes/music.tscn"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gdscript_formatter/plugin.cfg", "res://addons/virtual_joystick/plugin.cfg")
+enabled=PackedStringArray("res://addons/gdscript_formatter/plugin.cfg")
 
 [input]
 
