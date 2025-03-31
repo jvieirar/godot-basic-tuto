@@ -14,7 +14,7 @@ var selected_player: CharacterBody2D
 var is_mobile = OS.get_name() == "Android" or OS.get_name() == "iOS" or OS.has_feature("web_android")or OS.has_feature("web_ios")
 
 func _ready():
-	set_player_2()
+	set_player_1()
 
 func add_point():
 	score += 1
